@@ -9,9 +9,9 @@ import (
 
 func TestAesECB(t *testing.T) {
 	in := set1.DecodeB64([]byte(utils.GetDataTrimNewLine("data/7.txt")))
-	bc := set1.AesECB([]byte("YELLOW SUBMARINE"))
+	_, decrypter := set1.AesECB([]byte("YELLOW SUBMARINE"))
 	plaintext := make([]byte, len(in))
-	bc.DecryptBlocks(plaintext, in)
+	decrypter.DecryptBlocks(plaintext, in)
 	if !bytes.Equal(plaintext[:10], []byte("I'm back a")) {
 		t.Errorf("got: %v\n want: %v", plaintext[:10], []byte("I'm back a"))
 
