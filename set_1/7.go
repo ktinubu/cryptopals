@@ -5,15 +5,24 @@ import (
 	"crypto/cipher"
 )
 
-// AesECB returns a one block cipher capable of
-// encyptyon and another block cipher capable
-// of decryption
-func AesECB(key []byte) (Encrypter, Decrypter) {
+// AesEcbEncrypter returns a  block cipher
+// capable of encryption
+func AesEcbEncrypter(key []byte) Encrypter {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		panic(err)
 	}
-	return (Encrypter)(newECB(block)), (Decrypter)(newECB(block))
+	return (Encrypter)(newECB(block))
+}
+
+// AesEcbDecrypter returns a  block cipher
+// capable of decryption
+func AesEcbDecrypter(key []byte) Decrypter {
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		panic(err)
+	}
+	return (Decrypter)(newECB(block))
 }
 
 // Encrypter represents a block cipher
