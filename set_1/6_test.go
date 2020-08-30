@@ -3,6 +3,7 @@ package set1_test
 import (
 	"bytes"
 	set1 "cryptopals/set_1"
+	"cryptopals/utils"
 	"testing"
 )
 
@@ -68,8 +69,8 @@ func TestTranspose(t *testing.T) {
 }
 
 func TestCrackRepeatingKeyXOR(t *testing.T) {
-	englishFreq := set1.CharacterFrquency(getData("data/shakespeare.txt"))
-	input := set1.DecodeB64(getDataTrimNewLine("data/6.txt"))
+	englishFreq := set1.CharacterFrquency(utils.GetData("data/shakespeare.txt"))
+	input := set1.DecodeB64(utils.GetDataTrimNewLine("data/6.txt"))
 	_, key := set1.CrackRepeatingKeyXOR(input, englishFreq)
 	if !bytes.Equal(key, []byte("Terminator X: Bring the noise")) {
 		t.Errorf("got: %v\n want: %v", key, "Terminator X: Bring the noise")

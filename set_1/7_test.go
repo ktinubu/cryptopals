@@ -3,11 +3,12 @@ package set1_test
 import (
 	"bytes"
 	set1 "cryptopals/set_1"
+	"cryptopals/utils"
 	"testing"
 )
 
 func TestAesECB(t *testing.T) {
-	in := set1.DecodeB64([]byte(getDataTrimNewLine("data/7.txt")))
+	in := set1.DecodeB64([]byte(utils.GetDataTrimNewLine("data/7.txt")))
 	bc := set1.AesECB([]byte("YELLOW SUBMARINE"))
 	plaintext := make([]byte, len(in))
 	bc.DecryptBlocks(plaintext, in)

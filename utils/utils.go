@@ -1,4 +1,4 @@
-package set1_test
+package utils
 
 import (
 	"bufio"
@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func scanner(filename string) (*bufio.Scanner, *os.File) {
+func Scanner(filename string) (*bufio.Scanner, *os.File) {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Fatal(err)
@@ -17,7 +17,7 @@ func scanner(filename string) (*bufio.Scanner, *os.File) {
 	return bufio.NewScanner(file), file
 }
 
-func getData(fileName string) []byte {
+func GetData(fileName string) []byte {
 	data, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		log.Fatal(err)
@@ -28,9 +28,9 @@ func getData(fileName string) []byte {
 	return data
 }
 
-func getDataTrimNewLine(fileName string) []byte {
+func GetDataTrimNewLine(fileName string) []byte {
 	dst := []byte{}
-	sc, file := scanner(fileName)
+	sc, file := Scanner(fileName)
 	defer file.Close()
 	for sc.Scan() {
 		txt := sc.Text()
@@ -41,9 +41,9 @@ func getDataTrimNewLine(fileName string) []byte {
 
 // Reads stringified byte copy pasted into a txt file in the for "xx xx xx"
 // where xx is the ineger byte value
-func readBytes(fileName string) []byte {
+func ReadBytes(fileName string) []byte {
 	dst := []byte{}
-	scanner, file := scanner(fileName)
+	scanner, file := Scanner(fileName)
 	defer file.Close()
 	scanner.Split(bufio.ScanWords)
 	for scanner.Scan() {

@@ -3,6 +3,7 @@ package set1_test
 import (
 	"bytes"
 	set1 "cryptopals/set_1"
+	"cryptopals/utils"
 	"testing"
 )
 
@@ -22,10 +23,10 @@ var repeatingXorInputs = []challenge5Input{
 
 func TestRepeatingXorInputs(t *testing.T) {
 	for i, tt := range repeatingXorInputs {
-		in := []byte(getData(tt.in))
+		in := []byte(utils.GetData(tt.in))
 		xored := set1.RepeatedByteXOR(in, tt.key)
 		encodedXor := set1.EncodeHex(xored)
-		out := []byte(getDataTrimNewLine(tt.out))
+		out := []byte(utils.GetDataTrimNewLine(tt.out))
 		if !bytes.Equal(encodedXor, out) {
 			t.Errorf("#%d:\n  got: %q\n want: %q", i, encodedXor, out)
 		}

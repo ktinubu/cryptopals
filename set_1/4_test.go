@@ -2,25 +2,26 @@ package set1_test
 
 import (
 	"bytes"
-	set1 "cryptopals/set_1"
+	set_1 "cryptopals/set_1"
+	"cryptopals/utils"
 	"log"
 	"math"
 	"testing"
 )
 
 func TestDetectSingleCharacterXOR(t *testing.T) {
-	englishFreq := set1.CharacterFrquency(getData("data/shakespeare.txt"))
-	scanner, file := scanner("data/4.txt")
+	englishFreq := set_1.CharacterFrquency(utils.GetData("data/shakespeare.txt"))
+	scanner, file := utils.Scanner("data/4.txt")
 	defer file.Close()
 	lineNum := 0
 	bestChiSqr := math.MaxFloat64
 	plaintext := []byte{}
 	for scanner.Scan() {
-		decoded := set1.DecodeHex([]byte(scanner.Text()))
-		key, currChiSqr := set1.CrackSingleByteXOR(decoded, englishFreq)
+		decoded := set_1.DecodeHex([]byte(scanner.Text()))
+		key, currChiSqr := set_1.CrackSingleByteXOR(decoded, englishFreq)
 		if currChiSqr < bestChiSqr {
 			bestChiSqr = currChiSqr
-			plaintext = set1.SingleByteXOR(decoded, key)
+			plaintext = set_1.SingleByteXOR(decoded, key)
 		}
 		lineNum++
 	}
